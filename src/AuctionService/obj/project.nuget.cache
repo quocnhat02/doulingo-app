@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hyciXOsaOW0qkKF0Yc1ox//ZjATVdVVU8dgkBE52IRQzAdCLmMmNn8eqAmuGORArUv1RoikeamUkt3m1s8pj2g==",
+  "dgSpecHash": "ByBtSvwwmLiSNRkUB1C58jLTkh7TqZ/bFWy4f+xTEhWH0/WIZy4j1mr0ONDrAvfLwUlIp6joY73AeiWxVsJ80g==",
   "success": true,
   "projectFilePath": "D:\\Project\\Carsties\\src\\AuctionService\\AuctionService.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\QUOC NHAT\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
-    "C:\\Users\\QUOC NHAT\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\QUOC NHAT\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
-    "C:\\Users\\QUOC NHAT\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
-    "C:\\Users\\QUOC NHAT\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
-    "C:\\Users\\QUOC NHAT\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
