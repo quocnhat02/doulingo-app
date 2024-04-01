@@ -2,5 +2,5 @@
 
 public enum Status
 {
-    Live, Finished, ReverseNotMet
+    Live, Finished, ReserveNotMet
 }
