@@ -2,6 +2,7 @@
 
 namespace SearchService.Models;
 
+[Collection("Items")]
 public class Item : Entity
 {
     public int ReservePrice { get; set; }
