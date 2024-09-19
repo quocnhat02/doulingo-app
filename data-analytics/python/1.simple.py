@@ -114,7 +114,7 @@ print("Name:", person["name"])
 # Sets là một dạng dữ liệu có thể lưu trữ nhiều giá trị khác nhau trong một đối tượng duy nhất.
 # Sets khác Lists là các giá trị trong set được phân biệt bởi dấu phẩy và được đặt trong dấu ngoặc nhọn.
 unique_numbers = {1, 2, 3, 4, 5}
-print("First number:", unique_numbers[0])
+print("First number:", unique_numbers)
 
 # Typecasting
 # Typecasting là quá trình chuyển đổi kiểu dữ liệu từ một kiểu dữ liệu này sang kiểu dữ liệu khác.
