@@ -19,6 +19,20 @@ elif x == 0:
 else:
     print("x is negative")
 
+n = 0
+while n < 3:
+    print(n)
+    n += 1
+
+# while loop (mimicking do-while behavior)
+z = 0
+while True:
+    print(z)
+    z += 1
+    if z >= 3:
+        break
+
+print("For loop:")
 for i in range(3):
     print(i)
 
