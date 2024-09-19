@@ -8,8 +8,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(current_dir, 'data.csv')
 
 # Đọc dữ liệu từ file CSV:
-df = pd.read_csv(csv_path)
-print(df)
+# df = pd.read_csv(csv_path)
+# print(df)
 
 # In ra đường dẫn để kiểm tra
 # print(f"Đang đọc file từ: {csv_path}")
@@ -22,7 +22,7 @@ print(df)
 # df.describe()
 
 # Thêm cột:
-df['Salary'] = [50000, 60000, 70000, 80000]
+# df['Salary'] = [50000, 60000, 70000, 80000]
 
 # Xóa cột:
 # df.drop(columns=['Salary'], inplace=True)
@@ -57,4 +57,45 @@ df['Salary'] = [50000, 60000, 70000, 80000]
 # pd.concat([df1, df2], axis=0)  # Nối theo hàng
 
 
-print(df)
+# 9. Áp dụng hàm trên DataFrame(Apply Functions)
+# Pandas cho phép áp dụng hàm trên từng phần tử của DataFrame.
+# Tăng tuổi lên 1 cho tất cả các hàng
+# df['Age'] = df['Age'].apply(lambda x: x + 1)
+
+# df.map(lambda x: x*2 if type(x) == int else x)
+
+# 10. Pivot Table và Crosstab
+# Pivot Table giúp tổng hợp dữ liệu theo nhiều chiều khác nhau.
+
+# data = {
+#     'Date': ['2024-01-01', '2022-11-02', '2024-01-02', '2024-01-03', '2024-01-03', '2024-01-04'],
+#     'Product': ['Product A', 'Product B', 'Product A', 'Product C', 'Product B', 'Product A'],
+#     'Category': ['Category 1', 'Category 2', 'Category 1', 'Category 3', 'Category 2', 'Category 1'],
+#     'Quantity': [10, 5, 2, 3, 4, 1],
+#     'Unit Price': [100, 150, 100, 200, 150, 100],
+#     'Revenue': [1000, 750, 200, 600, 600, 100]
+# }
+
+# df = pd.DataFrame(data)
+
+# print(df)
+
+# print(df.pivot_table(index='Category', values='Revenue', aggfunc='sum'))
+# print(pd.crosstab(df['Product'], df['Category']))
+
+# 11. Xử lý dữ liệu thời gian(Time Series Data)
+# Pandas có các công cụ mạnh mẽ để làm việc với dữ liệu thời gian:
+# df['Date'] = pd.to_datetime(df['Date'])
+# print(df[df['Date'] > '2023-01-01'])
+# Tổng hợp dữ liệu theo tháng
+
+
+# print(df.set_index('Date').resample('ME').sum())
+
+# 12. Xử lý dữ liệu lớn(Large Data Processing)
+# Khi làm việc với dữ liệu lớn, Pandas cung cấp một số công cụ để xử lý:
+# for chunk in pd.read_csv(csv_path, chunksize=1000):
+#     print(chunk)
+
+# Chuyển đổi kiểu dữ liệu để tiết kiệm bộ nhớ
+# df['Age'] = df['Age'].astype('int32')
