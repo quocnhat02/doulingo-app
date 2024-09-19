@@ -49,8 +49,23 @@ import numpy as np
 # print("Standard Deviation:", np.std(data))
 
 # Chuyển Đổi Dữ Liệu
-float_arr = np.array([1.1, 2.2, 3.3])
-int_arr = float_arr.astype(int)
+# float_arr = np.array([1.1, 2.2, 3.3])
+# int_arr = float_arr.astype(int)
 
-print("Original Float Array:", float_arr)
-print("Converted to Integer Array:", int_arr)
+# print("Original Float Array:", float_arr)
+# print("Converted to Integer Array:", int_arr)
+
+# # Ma Trận và Tính Toán Đại Số
+# matrix1 = np.array([[1, 2], [3, 4]])
+# matrix2 = np.array([[5, 6], [7, 8]])
+
+# product = np.dot(matrix1, matrix2)
+# print("Matrix Product:\n", product)
+
+# Tính định thức và ma trận nghịch đảo:
+from numpy.linalg import inv, det
+
+matrix = np.array([[1, 2], [3, 4]])
+
+print("Determinant:", det(matrix))
+print("Inverse Matrix:\n", inv(matrix))
