@@ -71,11 +71,31 @@ import numpy as np
 # print("Inverse Matrix:\n", inv(matrix))
 
 # Làm Việc với Dữ Liệu Đúng Đắn
-data = np.array([1, np.nan, 3, 4, np.nan, 6])
+# data = np.array([1, np.nan, 3, 4, np.nan, 6])
 
-# Thay thế giá trị NaN bằng giá trị trung bình
-mean = np.nanmean(data)
-filled_data = np.nan_to_num(data, nan=mean)
+# # Thay thế giá trị NaN bằng giá trị trung bình
+# mean = np.nanmean(data)
+# filled_data = np.nan_to_num(data, nan=mean)
 
-print("Original Data:", data)
-print("Filled Data:", filled_data)
+# print("Original Data:", data)
+# print("Filled Data:", filled_data)
+
+# Xử lý Dữ Liệu Lớn và Hiệu Suất
+arr = np.array([10, 20, 30, 40, 50])
+
+# Thay đổi các giá trị lớn hơn 25 thành 100
+new_arr = np.where(arr > 25, 100, arr)
+print("Modified Array:", new_arr)
+
+# #Tính toán nhanh với np.vectorize:
+
+
+def func(x):
+    return x ** 2
+
+
+vectorized_func = np.vectorize(func)
+arr = np.array([1, 2, 3, 4])
+result = vectorized_func(arr)
+
+print("Result of Vectorized Function:", result)
