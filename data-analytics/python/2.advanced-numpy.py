@@ -81,21 +81,23 @@ import numpy as np
 # print("Filled Data:", filled_data)
 
 # Xử lý Dữ Liệu Lớn và Hiệu Suất
-arr = np.array([10, 20, 30, 40, 50])
+# arr = np.array([10, 20, 30, 40, 50])
 
-# Thay đổi các giá trị lớn hơn 25 thành 100
-new_arr = np.where(arr > 25, 100, arr)
-print("Modified Array:", new_arr)
+# # Thay đổi các giá trị lớn hơn 25 thành 100
+# new_arr = np.where(arr > 25, 100, arr)
+# print("Modified Array:", new_arr)
 
-# #Tính toán nhanh với np.vectorize:
-
-
-def func(x):
-    return x ** 2
+# # #Tính toán nhanh với np.vectorize:
 
 
-vectorized_func = np.vectorize(func)
-arr = np.array([1, 2, 3, 4])
-result = vectorized_func(arr)
+# def func(x):
+#     return x ** 2
 
-print("Result of Vectorized Function:", result)
+
+# vectorized_func = np.vectorize(func)
+# arr = np.array([1, 2, 3, 4])
+# result = vectorized_func(arr)
+
+# print("Result of Vectorized Function:", result)
+
+# Tạo và Xử Lý Dữ Liệu Mẫu
