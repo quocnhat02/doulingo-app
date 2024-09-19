@@ -33,10 +33,24 @@ import numpy as np
 # print("Multiplication:", arr1 * arr2)
 # print("Division:", arr1 / arr2)
 
-arr = np.array([10, 20, 30, 40, 50])
+# arr = np.array([10, 20, 30, 40, 50])
 
-# Chỉ mục
-print("Element at index 2:", arr[2])
+# # Chỉ mục
+# print("Element at index 2:", arr[2])
 
-# Cắt mảng
-print("Slice from index 1 to 4:", arr[1:4])
+# # Cắt mảng
+# print("Slice from index 1 to 4:", arr[1:4])
+
+# Các Hàm Thống Kê
+# data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# print("Mean:", np.mean(data))
+# print("Median:", np.median(data))
+# print("Standard Deviation:", np.std(data))
+
+# Chuyển Đổi Dữ Liệu
+float_arr = np.array([1.1, 2.2, 3.3])
+int_arr = float_arr.astype(int)
+
+print("Original Float Array:", float_arr)
+print("Converted to Integer Array:", int_arr)
