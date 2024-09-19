@@ -25,10 +25,18 @@ import numpy as np
 # linspace = np.linspace(0, 1, 5)
 # print("Linspace Array:", linspace)
 
-arr1 = np.array([1, 2, 3])
-arr2 = np.array([4, 5, 6])
+# arr1 = np.array([1, 2, 3])
+# arr2 = np.array([4, 5, 6])
 
-print("Addition:", arr1 + arr2)
-print("Subtraction:", arr1 - arr2)
-print("Multiplication:", arr1 * arr2)
-print("Division:", arr1 / arr2)
+# print("Addition:", arr1 + arr2)
+# print("Subtraction:", arr1 - arr2)
+# print("Multiplication:", arr1 * arr2)
+# print("Division:", arr1 / arr2)
+
+arr = np.array([10, 20, 30, 40, 50])
+
+# Chỉ mục
+print("Element at index 2:", arr[2])
+
+# Cắt mảng
+print("Slice from index 1 to 4:", arr[1:4])
