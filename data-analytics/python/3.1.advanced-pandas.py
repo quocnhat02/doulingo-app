@@ -28,3 +28,16 @@ df = pd.DataFrame(data)
 df['Date'] = pd.to_datetime(df['Date'])
 
 print(df)
+
+# Bước 2: Tính toán chỉ số tổng doanh thu và doanh thu trung bình
+# Sử dụng Pandas để tính toán tổng doanh thu và doanh thu trung bình theo từng sản phẩm và từng danh mục sản phẩm.
+
+# Tính tổng doanh thu theo sản phẩm:
+# Tổng doanh thu theo sản phẩm
+total_revenue_per_product = df.groupby('Product')['Revenue'].sum()
+print("Total Revenue per Product:\n", total_revenue_per_product)
+
+# Tính doanh thu trung bình theo danh mục sản phẩm:
+# Doanh thu trung bình theo danh mục sản phẩm
+avg_revenue_per_category = df.groupby('Category')['Revenue'].mean()
+print("Average Revenue per Category:\n", avg_revenue_per_category)
