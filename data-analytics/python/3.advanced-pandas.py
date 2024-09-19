@@ -67,14 +67,14 @@ csv_path = os.path.join(current_dir, 'data.csv')
 # 10. Pivot Table và Crosstab
 # Pivot Table giúp tổng hợp dữ liệu theo nhiều chiều khác nhau.
 
-# data = {
-#     'Date': ['2024-01-01', '2022-11-02', '2024-01-02', '2024-01-03', '2024-01-03', '2024-01-04'],
-#     'Product': ['Product A', 'Product B', 'Product A', 'Product C', 'Product B', 'Product A'],
-#     'Category': ['Category 1', 'Category 2', 'Category 1', 'Category 3', 'Category 2', 'Category 1'],
-#     'Quantity': [10, 5, 2, 3, 4, 1],
-#     'Unit Price': [100, 150, 100, 200, 150, 100],
-#     'Revenue': [1000, 750, 200, 600, 600, 100]
-# }
+data = {
+    'Date': ['2024-01-01', '2022-11-02', '2024-01-02', '2024-01-03', '2024-01-03', '2024-03-04'],
+    'Product': ['Product A', 'Product B', 'Product A', 'Product C', 'Product B', 'Product A'],
+    'Category': ['Category 1', 'Category 2', 'Category 1', 'Category 3', 'Category 2', 'Category 1'],
+    'Quantity': [10, 5, 2, 3, 4, 1],
+    'Unit Price': [100, 150, 100, 200, 150, 100],
+    'Revenue': [1000, 750, 200, 600, 600, 100]
+}
 
 # df = pd.DataFrame(data)
 
@@ -99,3 +99,32 @@ csv_path = os.path.join(current_dir, 'data.csv')
 
 # Chuyển đổi kiểu dữ liệu để tiết kiệm bộ nhớ
 # df['Age'] = df['Age'].astype('int32')
+
+
+# 13. Phân tích dữ liệu bán hàng
+# Bạn có thể kết hợp tất cả các kiến thức trên để thực hiện một bài phân tích dữ liệu thực tế.
+
+# Ví dụ: Phân tích doanh thu theo thời gian và tìm sản phẩm bán chạy nhất.
+
+# Đọc dữ liệu từ tệp CSV:
+df = pd.DataFrame(data)
+
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Làm sạch dữ liệu (xử lý giá trị thiếu):
+df['Revenue'].fillna(df['Revenue'].mean())
+
+# Tạo cột mới 'Month' để lấy giá trị tháng từ 'Date'
+df['Month'] = df['Date'].dt.to_period('M')  # 'M' là tháng
+
+
+# Nhóm và tính tổng doanh thu theo sản phẩm:
+total_revenue = df.groupby('Product')['Revenue'].sum()
+print("Total: ", total_revenue)
+
+# print(df.pivot_table(index='Date', values='Revenue', aggfunc='sum'))
+
+# Tạo pivot table để phân tích doanh thu theo tháng:
+monthly_revenue = df.groupby('Month')['Revenue'].sum()
+
+print(monthly_revenue)
