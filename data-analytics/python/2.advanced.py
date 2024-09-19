@@ -63,9 +63,19 @@ import numpy as np
 # print("Matrix Product:\n", product)
 
 # Tính định thức và ma trận nghịch đảo:
-from numpy.linalg import inv, det
+# from numpy.linalg import inv, det
 
-matrix = np.array([[1, 2], [3, 4]])
+# matrix = np.array([[1, 2], [3, 4]])
 
-print("Determinant:", det(matrix))
-print("Inverse Matrix:\n", inv(matrix))
+# print("Determinant:", det(matrix))
+# print("Inverse Matrix:\n", inv(matrix))
+
+# Làm Việc với Dữ Liệu Đúng Đắn
+data = np.array([1, np.nan, 3, 4, np.nan, 6])
+
+# Thay thế giá trị NaN bằng giá trị trung bình
+mean = np.nanmean(data)
+filled_data = np.nan_to_num(data, nan=mean)
+
+print("Original Data:", data)
+print("Filled Data:", filled_data)
