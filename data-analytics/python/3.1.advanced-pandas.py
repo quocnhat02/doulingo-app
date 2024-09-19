@@ -10,6 +10,7 @@
 # Bước 1: Tạo dữ liệu bán hàng mẫu
 # Sử dụng Pandas để tạo một DataFrame từ một dictionary với các cột như Date, Product, Category, Quantity, Unit Price, và Revenue.
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 # Tạo dữ liệu bán hàng mẫu
@@ -41,3 +42,34 @@ print("Total Revenue per Product:\n", total_revenue_per_product)
 # Doanh thu trung bình theo danh mục sản phẩm
 avg_revenue_per_category = df.groupby('Category')['Revenue'].mean()
 print("Average Revenue per Category:\n", avg_revenue_per_category)
+
+# Bước 3: Xử lý dữ liệu bị thiếu (missing values)
+# Giả sử trong bộ dữ liệu, có một số giá trị bị thiếu ở cột Revenue. Bạn có thể sử dụng các kỹ thuật như điền giá trị bị thiếu bằng giá trị trung bình hoặc giá trị mặc định.
+# Giả sử có một số giá trị bị thiếu ở cột Revenue
+df_missing = df.copy()
+df_missing.loc[3, 'Revenue'] = None
+
+# Điền giá trị thiếu bằng doanh thu trung bình của các sản phẩm
+df_missing['Revenue'] = df_missing['Revenue'].fillna(
+    df_missing['Revenue'].mean())
+
+print("Data after handling missing values:\n", df_missing)
+
+# Bước 4: Tìm sản phẩm bán chạy nhất
+# Sử dụng hàm idxmax() để tìm sản phẩm có tổng doanh thu cao nhất.
+# Tìm sản phẩm có doanh thu cao nhất
+best_selling_product = df.groupby('Product')['Revenue'].sum().idxmax()
+print(f"Best selling product: {best_selling_product}")
+
+# Bước 5: Phân tích xu hướng doanh thu theo thời gian
+# Sử dụng Pandas để nhóm dữ liệu theo ngày và tính tổng doanh thu cho từng ngày. Sau đó, sử dụng matplotlib để vẽ biểu đồ xu hướng doanh thu theo thời gian.
+
+# Tính tổng doanh thu theo thời gian
+revenue_by_date = df.groupby('Date')['Revenue'].sum()
+
+# Vẽ biểu đồ doanh thu theo thời gian
+plt.plot(revenue_by_date.index, revenue_by_date.values, marker='o')
+plt.xlabel('Date')
+plt.ylabel('Revenue')
+plt.title('Revenue Trend Over Time')
+plt.show()
