@@ -1,0 +1,25 @@
+server:
+  port: ${API_GATEWAY_PORT}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: course-service
+          uri: lb://course-service
+          predicates:
+            - Path=/api/courses/**
+        - id: challenge-service
+          uri: lb://challenge-service
+          predicates:
+            - Path=/api/challenges/**
+        - id: progress-service
+          uri: lb://progress-service
+          predicates:
+            - Path=/api/progress/**
+        - id: subscription-service
+          uri: lb://subscription-service
+          predicates:
+            - Path=/api/subscription/**

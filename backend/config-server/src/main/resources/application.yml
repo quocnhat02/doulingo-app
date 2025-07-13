@@ -1,0 +1,31 @@
+server:
+  port: ${CONFIG_SERVER_PORT}
+
+spring:
+  application:
+    name: config-server
+  banner:
+    location: classpath:banner.txt
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${GIT_REPO_URI}
+          default-label: ${GIT_BRANCH:dev}
+          search-paths: ${GIT_CONFIG_PATH}
+          username: ${GIT_CONFIG_USERNAME}
+          password: ${GIT_CONFIG_TOKEN}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
+    fetch-registry: true
+    register-with-eureka: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

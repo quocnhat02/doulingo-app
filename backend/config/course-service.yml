@@ -1,0 +1,19 @@
+server:
+  port: ${COURSE_SERVICE_PORT}
+
+spring:
+  application:
+    name: course-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${COURSE_DB_NAME}
+    username: ${COURSE_DB_USER}
+    password: ${COURSE_DB_PASS}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}

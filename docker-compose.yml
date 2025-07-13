@@ -1,0 +1,8 @@
+services:
+  config-server:
+    ports:
+      - "${CONFIG_SERVER_PORT}:8888"
+    environment:
+      - GIT_REPO_URI=${GIT_REPO_URI}
+      - GIT_BRANCH=${GIT_BRANCH}
+      - GIT_CONFIG_PATH=${GIT_CONFIG_PATH}

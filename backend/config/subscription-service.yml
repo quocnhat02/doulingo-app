@@ -1,0 +1,19 @@
+server:
+  port: ${SUBSCRIPTION_SERVICE_PORT}
+
+spring:
+  application:
+    name: subscription-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${SUBSCRIPTION_DB_NAME}
+    username: ${SUBSCRIPTION_DB_USER}
+    password: ${SUBSCRIPTION_DB_PASS}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
