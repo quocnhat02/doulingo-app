@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${GIT_REPO_URI}
+          default-label: ${GIT_BRANCH:dev}
+          search-paths: .
+          username: ${GIT_CONFIG_USERNAME}
+          password: ${GIT_CONFIG_TOKEN}

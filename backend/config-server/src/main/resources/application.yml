@@ -6,16 +6,20 @@ spring:
     name: config-server
   banner:
     location: classpath:banner.txt
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:native}
 
-  cloud:
-    config:
-      server:
-        git:
-          uri: ${GIT_REPO_URI}
-          default-label: ${GIT_BRANCH:dev}
-          search-paths: ${GIT_CONFIG_PATH}
-          username: ${GIT_CONFIG_USERNAME}
-          password: ${GIT_CONFIG_TOKEN}
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: ${CONFIG_SEARCH_LOCATION}
+#        git:
+#          uri: ${GIT_REPO_URI}
+#          default-label: ${GIT_BRANCH:dev}
+#          search-paths: ${GIT_CONFIG_PATH}
+#          username: ${GIT_CONFIG_USERNAME}
+#          password: ${GIT_CONFIG_TOKEN}
 
 eureka:
   client:

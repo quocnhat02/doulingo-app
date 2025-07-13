@@ -1,2 +1,44 @@
-.env
+# ========== GLOBAL ==========
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+.DS_Store
+
+# ========== FRONTEND ==========
+/frontend/node_modules/
+/frontend/.next/
+/frontend/.env.local
+/frontend/.env*
+
+# ========== BACKEND ==========
+
+# Ignore Maven target folders
+/backend/**/target/
+
+# Ignore Spring Boot specific
+/backend/**/.classpath
+/backend/**/.project
+/backend/**/.settings
+/backend/**/.idea
+/backend/**/.env
+/backend/**/application-local.yml
+
+# Ignore config server local override
+/backend/config/application-local.yml
+
+# If config is external and injected by env (optional)
+# ! backend/config/**   <--- don't ignore this folder unless you're cloning it separately
+
+# ========== DOCKER ==========
+**/docker-compose.override.yml
+**/.dockerignore
+
+# ========== OS / IDE ==========
+.vscode/
 .idea/
+*.iml
+
+# ========== ENV FILES ==========
+.env
