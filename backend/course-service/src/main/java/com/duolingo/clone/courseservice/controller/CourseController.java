@@ -6,6 +6,7 @@ import com.duolingo.clone.courseservice.dto.CourseResponseDto;
 import com.duolingo.clone.courseservice.entity.Course;
 import com.duolingo.clone.courseservice.service.CourseService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<CourseResponseDto>> createCourse(
-            @RequestBody CourseDto dto,
+            @Valid @RequestBody CourseDto dto,
             HttpServletRequest request) {
 
         CourseResponseDto result = courseService.createCourse(dto);
@@ -74,7 +75,7 @@ public class CourseController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<CourseResponseDto>> updateCourse(
             @PathVariable Long id,
-            @RequestBody CourseDto dto,
+            @Valid @RequestBody CourseDto dto,
             HttpServletRequest request) {
 
         CourseResponseDto result = courseService.updateCourse(id, dto);

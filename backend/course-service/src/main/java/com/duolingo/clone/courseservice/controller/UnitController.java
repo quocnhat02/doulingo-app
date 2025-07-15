@@ -6,6 +6,7 @@ import com.duolingo.clone.courseservice.dto.UnitResponseDto;
 import com.duolingo.clone.courseservice.entity.Unit;
 import com.duolingo.clone.courseservice.service.UnitService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class UnitController {
     private final UnitService unitService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<UnitResponseDto>> createUnit(@RequestBody UnitDto dto, HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<UnitResponseDto>> createUnit(@Valid @RequestBody UnitDto dto, HttpServletRequest request) {
         UnitResponseDto result = unitService.createUnit(dto);
         return ResponseEntity.ok(ApiResponse.ok("Unit created successfully", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
     }
@@ -40,7 +41,7 @@ public class UnitController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<UnitResponseDto>> updateUnit(@PathVariable Long id, @RequestBody UnitDto dto, HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<UnitResponseDto>> updateUnit(@PathVariable Long id, @Valid @RequestBody UnitDto dto, HttpServletRequest request) {
         UnitResponseDto result = unitService.updateUnit(id, dto);
         return ResponseEntity.ok(ApiResponse.ok("Unit updated", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
     }

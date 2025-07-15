@@ -5,6 +5,7 @@ import com.duolingo.clone.courseservice.dto.LessonDto;
 import com.duolingo.clone.courseservice.dto.LessonResponseDto;
 import com.duolingo.clone.courseservice.service.LessonService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class LessonController {
     private final LessonService lessonService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<LessonResponseDto>> createLesson(@RequestBody LessonDto dto, HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<LessonResponseDto>> createLesson(@Valid @RequestBody LessonDto dto, HttpServletRequest request) {
         LessonResponseDto result = lessonService.createLesson(dto);
         return ResponseEntity.ok(ApiResponse.ok("Lesson created successfully", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
     }
@@ -39,7 +40,7 @@ public class LessonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<LessonResponseDto>> updateLesson(@PathVariable Long id, @RequestBody LessonDto dto, HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<LessonResponseDto>> updateLesson(@PathVariable Long id, @Valid @RequestBody LessonDto dto, HttpServletRequest request) {
         LessonResponseDto result = lessonService.updateLesson(id, dto);
         return ResponseEntity.ok(ApiResponse.ok("Lesson updated", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
     }
