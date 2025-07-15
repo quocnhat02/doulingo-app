@@ -1,1 +1,15 @@
-spring.application.name=common-lib
+spring:
+  application:
+    name: common-lib
+
+clerk:
+  jwt-public-key: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy6ih5wCA3XlABAGPQTaC
+    E3jWaHTB6MCB29c58dY2a76IEEstNSS8wMFB6vWnTG5zG/3+Mqxa5fTY7eCd/TEW
+    7Hhqua+iUazxuB5TCKm7LENZXTX1c6w8ja3JI3ZWXixIs+vlNgFUejsd7Jr6hRlu
+    HokXHjg00Ojx25Pg3rLsic63K53xi4tm2GVkQefaOaTk0Uumn/9+VDtB3mI7Urv7
+    H4NmAZ4N5AUEF5OL9CBsYRYuyOsLDmur4aoP27zb0HEzqWasYWGcd54m9My8fFhz
+    7Tzk3whKEMCu3SwVJliSNaO8GVgAsbNuIpzTUraSdtavLvPJRVtpG8mg5No1Dsex
+    9QIDAQAB
+    -----END PUBLIC KEY-----
