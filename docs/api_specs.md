@@ -73,8 +73,8 @@
 {
   "title": "Unit 1",
   "description": "Introduction to Spanish",
-  "courseId": 1,
-  "order": 1
+  "order": 1,
+  "courseId": 1
 }
 ```
 
@@ -86,7 +86,9 @@
 
 ```json
 {
-  "title": "Updated Title"
+  "title": "Updated Title",
+  "description": "Updated Description",
+  "order": 2
 }
 ```
 
@@ -106,8 +108,8 @@
 ```json
 {
   "title": "Lesson 1",
-  "unitId": 1,
-  "order": 1
+  "order": 1,
+  "unitId": 1
 }
 ```
 
@@ -117,7 +119,8 @@
 
 ```json
 {
-  "title": "Updated Lesson"
+  "title": "Updated Lesson",
+  "order": 2
 }
 ```
 
@@ -198,12 +201,12 @@
 
 - **Events handled**:
 
-    - `checkout.session.completed`: Create user subscription
-    - `invoice.payment_succeeded`: Update subscription period
+  - `checkout.session.completed`: Create user subscription
+  - `invoice.payment_succeeded`: Update subscription period
 
 - **Headers**:
 
-    - `Stripe-Signature: <signature>`
+  - `Stripe-Signature: <signature>`
 
 ---
 
@@ -214,4 +217,26 @@
 - `401 Unauthorized`: Not logged in or invalid session
 - `403 Forbidden`: Not an admin
 - `404 Not Found`: Resource not found (if handled)
+
+---
+
+## 🌐 Discovery Service
+
+### `GET /eureka/apps`
+
+- **Description**: Fetch registered microservices from Eureka
+
+### `POST /eureka/apps/{app-name}`
+
+- **Description**: Register a new service instance
+
+### `DELETE /eureka/apps/{app-name}/{instanceId}`
+
+- **Description**: Unregister a service instance
+
+### Notes:
+
+- Run on port `8761`
+- Used internally by services to discover each other
+- UI available at `http://localhost:8761`
 

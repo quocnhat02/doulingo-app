@@ -4,14 +4,20 @@ server:
 spring:
   application:
     name: course-service
+
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${COURSE_DB_NAME}
+    url: jdbc:postgresql://${COURSE_DB_HOST}:${COURSE_DB_PORT}/${COURSE_DB_NAME}?sslmode=require
     username: ${COURSE_DB_USER}
     password: ${COURSE_DB_PASS}
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 eureka:
   client:
