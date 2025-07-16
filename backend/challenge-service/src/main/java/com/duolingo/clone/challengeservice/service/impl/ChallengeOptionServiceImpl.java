@@ -41,7 +41,7 @@ public class ChallengeOptionServiceImpl implements ChallengeOptionService {
 
     @Override
     public List<ChallengeOptionResponseDTO> getOptionsByChallengeId(Long challengeId) {
-        return challengeOptionRepository.findByChallengeId(challengeId)
+        return challengeOptionRepository.findByChallenge_ChallengeId(challengeId)
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());

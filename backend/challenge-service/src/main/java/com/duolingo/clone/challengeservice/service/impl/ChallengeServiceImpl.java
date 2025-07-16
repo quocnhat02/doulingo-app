@@ -31,6 +31,7 @@ public class ChallengeServiceImpl implements ChallengeService {
                 .challengeQuestion(dto.getChallengeQuestion())
                 .challengeType(dto.getChallengeType())
                 .lessonId(dto.getLessonId())
+                .challengeOrder(dto.getChallengeOrder())
                 .build();
 
         Challenge saved = challengeRepository.save(challenge);
@@ -65,6 +66,7 @@ public class ChallengeServiceImpl implements ChallengeService {
         dto.setChallengeId(challenge.getChallengeId());
         dto.setChallengeQuestion(challenge.getChallengeQuestion());
         dto.setChallengeType(challenge.getChallengeType());
+        dto.setChallengeOrder(challenge.getChallengeOrder());
         dto.setLessonId(challenge.getLessonId());
         return dto;
     }

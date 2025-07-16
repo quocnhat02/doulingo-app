@@ -12,7 +12,7 @@ public class ChallengeRequestDTO {
     @NotNull
     private Long lessonId;
 
-    @NotBlank
+    @NotNull(message = "Challenge type must not be null")
     private ChallengeType challengeType;
 
     @NotBlank
