@@ -1,11 +1,13 @@
 package com.duolingo.clone.challengeservice.service;
 
+import com.duolingo.clone.challengeservice.dto.request.ChallengeRequestDTO;
+import com.duolingo.clone.challengeservice.dto.response.ChallengeResponseDTO;
+
 import java.util.List;
 
 public interface ChallengeService {
-    ChallengeResponseDto createChallenge(ChallengeDto dto);
-    List<ChallengeResponseDto> getChallengesByLesson(Long lessonId);
-    ChallengeResponseDto getChallenge(Long id);
-    ChallengeResponseDto updateChallenge(Long id, ChallengeDto dto);
+    ChallengeResponseDTO createChallenge(ChallengeRequestDTO dto);
+    ChallengeResponseDTO getChallengeById(Long id);
+    List<ChallengeResponseDTO> getChallengesByLessonId(Long lessonId);
     void deleteChallenge(Long id);
 }

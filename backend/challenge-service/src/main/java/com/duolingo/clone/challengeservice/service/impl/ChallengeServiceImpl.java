@@ -1,11 +1,12 @@
 package com.duolingo.clone.challengeservice.service.impl;
 
 import com.duolingo.clone.challengeservice.client.LessonClient;
+import com.duolingo.clone.challengeservice.dto.request.ChallengeRequestDTO;
+import com.duolingo.clone.challengeservice.dto.response.ChallengeResponseDTO;
 import com.duolingo.clone.challengeservice.entity.Challenge;
-import com.duolingo.clone.challengeservice.mapper.ChallengeMapper;
 import com.duolingo.clone.challengeservice.repository.ChallengeRepository;
 import com.duolingo.clone.challengeservice.service.ChallengeService;
-import com.duolingo.clone.common.exception.ResourceNotFoundException;
+import com.duolingo.clone.common.dto.LessonResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,45 +20,52 @@ public class ChallengeServiceImpl implements ChallengeService {
     private final LessonClient lessonClient;
 
     @Override
-    public ChallengeResponseDto createChallenge(ChallengeDto dto) {
-        // Validate lessonId before saving challenge
-        lessonClient.getLessonById(dto.getLessonId());
+    public ChallengeResponseDTO createChallenge(ChallengeRequestDTO dto) {
+        // Gọi course-service kiểm tra lessonId có tồn tại không
+        LessonResponseDTO lesson = lessonClient.getLessonById(dto.getLessonId()).getData();
+        if (lesson == null) {
+            throw new IllegalArgumentException("Lesson not found");
+        }
 
-        Challenge saved = challengeRepository.save(ChallengeMapper.toEntity(dto));
-        return ChallengeMapper.toResponseDto(saved);
+        Challenge challenge = Challenge.builder()
+                .challengeQuestion(dto.getChallengeQuestion())
+                .challengeType(dto.getChallengeType())
+                .lessonId(dto.getLessonId())
+                .build();
+
+        Challenge saved = challengeRepository.save(challenge);
+        return mapToDTO(saved);
     }
 
     @Override
-    public List<ChallengeResponseDto> getChallengesByLesson(Long lessonId) {
+    public ChallengeResponseDTO getChallengeById(Long id) {
+        Challenge challenge = challengeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Challenge not found"));
+        return mapToDTO(challenge);
+    }
+
+    @Override
+    public List<ChallengeResponseDTO> getChallengesByLessonId(Long lessonId) {
         return challengeRepository.findByLessonId(lessonId)
-                .stream().map(ChallengeMapper::toResponseDto).toList();
-    }
-
-    @Override
-    public ChallengeResponseDto getChallenge(Long id) {
-        Challenge challenge = challengeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Challenge not found with id: " + id));
-        return ChallengeMapper.toResponseDto(challenge);
-    }
-
-    @Override
-    public ChallengeResponseDto updateChallenge(Long id, ChallengeDto dto) {
-        Challenge challenge = challengeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Challenge not found with id: " + id));
-
-        challenge.setLessonId(dto.getLessonId());
-        challenge.setType(dto.getType());
-        challenge.setQuestion(dto.getQuestion());
-        challenge.setChallengeOrder(dto.getChallengeOrder());
-
-        return ChallengeMapper.toResponseDto(challengeRepository.save(challenge));
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
     }
 
     @Override
     public void deleteChallenge(Long id) {
         if (!challengeRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Challenge not found with id: " + id);
+            throw new IllegalArgumentException("Challenge not found");
         }
         challengeRepository.deleteById(id);
+    }
+
+    private ChallengeResponseDTO mapToDTO(Challenge challenge) {
+        ChallengeResponseDTO dto = new ChallengeResponseDTO();
+        dto.setChallengeId(challenge.getChallengeId());
+        dto.setChallengeQuestion(challenge.getChallengeQuestion());
+        dto.setChallengeType(challenge.getChallengeType());
+        dto.setLessonId(challenge.getLessonId());
+        return dto;
     }
 }

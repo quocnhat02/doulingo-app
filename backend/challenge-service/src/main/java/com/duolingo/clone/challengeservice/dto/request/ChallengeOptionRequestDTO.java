@@ -6,8 +6,13 @@ import lombok.Data;
 
 @Data
 public class ChallengeOptionRequestDTO {
+
     @NotBlank
-    private String content;
+    private String optionText;
+
+    private String imageSrc;
+
+    private String audioSrc;
 
     private boolean isCorrect;
 
