@@ -21,6 +21,41 @@ public class CourseController {
 
     private final CourseService courseService;
 
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<CourseResponseDTO>>> searchCoursesByTitle(
+            @RequestParam String title,
+            HttpServletRequest request) {
+
+        List<CourseResponseDTO> result = courseService.searchByTitle(title);
+        return ResponseEntity.ok(
+                ApiResponse.ok(
+                        "Search results fetched",
+                        HttpStatus.OK.value(),
+                        request.getRequestURI(),
+                        UUID.randomUUID().toString(),
+                        result
+                )
+        );
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<ApiResponse<List<CourseResponseDTO>>> getCoursesWithPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            HttpServletRequest request) {
+
+        List<CourseResponseDTO> result = courseService.getCoursesWithPagination(page, size);
+        return ResponseEntity.ok(
+                ApiResponse.ok(
+                        "Courses fetched with pagination",
+                        HttpStatus.OK.value(),
+                        request.getRequestURI(),
+                        UUID.randomUUID().toString(),
+                        result
+                )
+        );
+    }
+
     @PostMapping
     public ResponseEntity<ApiResponse<CourseResponseDTO>> createCourse(
             @Valid @RequestBody CourseRequestDTO dto,

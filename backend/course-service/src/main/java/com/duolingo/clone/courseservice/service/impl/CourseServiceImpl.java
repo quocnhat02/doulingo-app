@@ -7,6 +7,7 @@ import com.duolingo.clone.courseservice.entity.Course;
 import com.duolingo.clone.courseservice.repository.CourseRepository;
 import com.duolingo.clone.courseservice.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,22 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+
+    @Override
+    public List<CourseResponseDTO> searchByTitle(String title) {
+        return courseRepository.findByCourseTitleContainingIgnoreCase(title)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CourseResponseDTO> getCoursesWithPagination(int page, int size) {
+        return courseRepository.findAll(PageRequest.of(page, size))
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public CourseResponseDTO createCourse(CourseRequestDTO dto) {
