@@ -1,8 +1,8 @@
 package com.duolingo.clone.courseservice.controller;
 
 import com.duolingo.clone.common.response.ApiResponse;
-import com.duolingo.clone.courseservice.dto.LessonDto;
-import com.duolingo.clone.courseservice.dto.LessonResponseDto;
+import com.duolingo.clone.courseservice.dto.request.LessonRequestDTO;
+import com.duolingo.clone.courseservice.dto.response.LessonResponseDTO;
 import com.duolingo.clone.courseservice.service.LessonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -22,32 +22,53 @@ public class LessonController {
     private final LessonService lessonService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<LessonResponseDto>> createLesson(@Valid @RequestBody LessonDto dto, HttpServletRequest request) {
-        LessonResponseDto result = lessonService.createLesson(dto);
-        return ResponseEntity.ok(ApiResponse.ok("Lesson created successfully", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
-    }
+    public ResponseEntity<ApiResponse<LessonResponseDTO>> createLesson(
+            @Valid @RequestBody LessonRequestDTO dto,
+            HttpServletRequest request) {
 
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<LessonResponseDto>>> getAllLessons(HttpServletRequest request) {
-        List<LessonResponseDto> result = lessonService.getAllLessons();
-        return ResponseEntity.ok(ApiResponse.ok("All lessons fetched", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
+        LessonResponseDTO result = lessonService.createLesson(dto);
+        return ResponseEntity.ok(
+                ApiResponse.ok(
+                        "Lesson created successfully",
+                        HttpStatus.OK.value(),
+                        request.getRequestURI(),
+                        UUID.randomUUID().toString(),
+                        result
+                )
+        );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<LessonResponseDto>> getLessonById(@PathVariable Long id, HttpServletRequest request) {
-        LessonResponseDto result = lessonService.getLessonById(id);
-        return ResponseEntity.ok(ApiResponse.ok("Lesson fetched", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
-    }
+    public ResponseEntity<ApiResponse<LessonResponseDTO>> getLessonById(
+            @PathVariable Long id,
+            HttpServletRequest request) {
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<LessonResponseDto>> updateLesson(@PathVariable Long id, @Valid @RequestBody LessonDto dto, HttpServletRequest request) {
-        LessonResponseDto result = lessonService.updateLesson(id, dto);
-        return ResponseEntity.ok(ApiResponse.ok("Lesson updated", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), result));
+        LessonResponseDTO result = lessonService.getLessonById(id);
+        return ResponseEntity.ok(
+                ApiResponse.ok(
+                        "Lesson fetched",
+                        HttpStatus.OK.value(),
+                        request.getRequestURI(),
+                        UUID.randomUUID().toString(),
+                        result
+                )
+        );
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteLesson(@PathVariable Long id, HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<Void>> deleteLesson(
+            @PathVariable Long id,
+            HttpServletRequest request) {
+
         lessonService.deleteLesson(id);
-        return ResponseEntity.ok(ApiResponse.ok("Lesson deleted", HttpStatus.OK.value(), request.getRequestURI(), UUID.randomUUID().toString(), null));
+        return ResponseEntity.ok(
+                ApiResponse.ok(
+                        "Lesson deleted",
+                        HttpStatus.OK.value(),
+                        request.getRequestURI(),
+                        UUID.randomUUID().toString(),
+                        null
+                )
+        );
     }
 }

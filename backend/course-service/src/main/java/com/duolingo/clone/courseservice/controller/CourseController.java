@@ -1,9 +1,8 @@
 package com.duolingo.clone.courseservice.controller;
 
 import com.duolingo.clone.common.response.ApiResponse;
-import com.duolingo.clone.courseservice.dto.CourseDto;
-import com.duolingo.clone.courseservice.dto.CourseResponseDto;
-import com.duolingo.clone.courseservice.entity.Course;
+import com.duolingo.clone.courseservice.dto.request.CourseRequestDTO;
+import com.duolingo.clone.courseservice.dto.response.CourseResponseDTO;
 import com.duolingo.clone.courseservice.service.CourseService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -23,11 +22,11 @@ public class CourseController {
     private final CourseService courseService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<CourseResponseDto>> createCourse(
-            @Valid @RequestBody CourseDto dto,
+    public ResponseEntity<ApiResponse<CourseResponseDTO>> createCourse(
+            @Valid @RequestBody CourseRequestDTO dto,
             HttpServletRequest request) {
 
-        CourseResponseDto result = courseService.createCourse(dto);
+        CourseResponseDTO result = courseService.createCourse(dto);
         return ResponseEntity.ok(
                 ApiResponse.ok(
                         "Course created successfully",
@@ -40,10 +39,10 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CourseResponseDto>>> getAllCourses(
+    public ResponseEntity<ApiResponse<List<CourseResponseDTO>>> getAllCourses(
             HttpServletRequest request) {
 
-        List<CourseResponseDto> result = courseService.getAllCourses();
+        List<CourseResponseDTO> result = courseService.getAllCourses();
         return ResponseEntity.ok(
                 ApiResponse.ok(
                         "All courses fetched",
@@ -56,11 +55,11 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<CourseResponseDto>> getCourse(
+    public ResponseEntity<ApiResponse<CourseResponseDTO>> getCourse(
             @PathVariable Long id,
             HttpServletRequest request) {
 
-        CourseResponseDto result = courseService.getCourseById(id);
+        CourseResponseDTO result = courseService.getCourseById(id);
         return ResponseEntity.ok(
                 ApiResponse.ok(
                         "Course fetched",
@@ -73,12 +72,12 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<CourseResponseDto>> updateCourse(
+    public ResponseEntity<ApiResponse<CourseResponseDTO>> updateCourse(
             @PathVariable Long id,
-            @Valid @RequestBody CourseDto dto,
+            @Valid @RequestBody CourseRequestDTO dto,
             HttpServletRequest request) {
 
-        CourseResponseDto result = courseService.updateCourse(id, dto);
+        CourseResponseDTO result = courseService.updateCourse(id, dto);
         return ResponseEntity.ok(
                 ApiResponse.ok(
                         "Course updated",

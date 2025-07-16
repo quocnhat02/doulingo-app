@@ -5,13 +5,18 @@ spring:
   application:
     name: challenge-service
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${CHALLENGE_DB_NAME}
+    url: jdbc:postgresql://${CHALLENGE_DB_HOST}:${CHALLENGE_DB_PORT}/${CHALLENGE_DB_NAME}?sslmode=require
     username: ${CHALLENGE_DB_USER}
     password: ${CHALLENGE_DB_PASS}
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 eureka:
   client:

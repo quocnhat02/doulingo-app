@@ -1,18 +1,19 @@
-package com.duolingo.clone.courseservice.dto;
+package com.duolingo.clone.courseservice.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class UnitResponseDto {
+public class UnitResponseDTO {
     private Long unitId;
     private String unitTitle;
     private String unitDescription;
-    private Integer unitOrder;
+    private int unitOrder;
     private Long courseId;
 }

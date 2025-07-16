@@ -1,14 +1,14 @@
 package com.duolingo.clone.courseservice.service.impl;
 
 import com.duolingo.clone.common.exception.ResourceNotFoundException;
-import com.duolingo.clone.courseservice.dto.LessonDto;
-import com.duolingo.clone.courseservice.dto.LessonResponseDto;
+import com.duolingo.clone.courseservice.dto.request.LessonRequestDTO;
+import com.duolingo.clone.courseservice.dto.response.LessonResponseDTO;
 import com.duolingo.clone.courseservice.entity.Lesson;
 import com.duolingo.clone.courseservice.entity.Unit;
-import com.duolingo.clone.courseservice.mapper.LessonMapper;
 import com.duolingo.clone.courseservice.repository.LessonRepository;
 import com.duolingo.clone.courseservice.repository.UnitRepository;
 import com.duolingo.clone.courseservice.service.LessonService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,52 +22,44 @@ public class LessonServiceImpl implements LessonService {
     private final UnitRepository unitRepository;
 
     @Override
-    public LessonResponseDto createLesson(LessonDto dto) {
+    @Transactional
+    public LessonResponseDTO createLesson(LessonRequestDTO dto) {
         Unit unit = unitRepository.findById(dto.getUnitId())
-                .orElseThrow(() -> new ResourceNotFoundException("Unit not found with id: " + dto.getUnitId()));
+                .orElseThrow(() -> new IllegalArgumentException("Unit not found"));
 
-        Lesson lesson = LessonMapper.toEntity(dto);
-        lesson.setUnit(unit);
+        Lesson lesson = Lesson.builder()
+                .lessonTitle(dto.getLessonTitle())
+                .lessonOrder(dto.getLessonOrder())
+                .unit(unit)
+                .build();
 
-        Lesson saved = lessonRepository.save(lesson);
-        return LessonMapper.toLessonResponseDto(saved);
+        lesson = lessonRepository.save(lesson);
+
+        LessonResponseDTO response = new LessonResponseDTO();
+        response.setLessonId(lesson.getLessonId());
+        response.setLessonTitle(lesson.getLessonTitle());
+        response.setLessonOrder(lesson.getLessonOrder());
+        response.setUnitId(unit.getUnitId());
+
+        return response;
     }
 
     @Override
-    public List<LessonResponseDto> getAllLessons() {
-        return lessonRepository.findAll().stream()
-                .map(LessonMapper::toLessonResponseDto)
-                .toList();
-    }
-
-    @Override
-    public LessonResponseDto getLessonById(Long id) {
+    public LessonResponseDTO getLessonById(Long id) {
         Lesson lesson = lessonRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Lesson not found with id: " + id));
-        return LessonMapper.toLessonResponseDto(lesson);
-    }
+                .orElseThrow(() -> new IllegalArgumentException("Lesson not found"));
 
-    @Override
-    public LessonResponseDto updateLesson(Long id, LessonDto dto) {
-        Lesson lesson = lessonRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Lesson not found with id: " + id));
+        LessonResponseDTO response = new LessonResponseDTO();
+        response.setLessonId(lesson.getLessonId());
+        response.setLessonTitle(lesson.getLessonTitle());
+        response.setLessonOrder(lesson.getLessonOrder());
+        response.setUnitId(lesson.getUnit().getUnitId());
 
-        Unit unit = unitRepository.findById(dto.getUnitId())
-                .orElseThrow(() -> new ResourceNotFoundException("Unit not found with id: " + dto.getUnitId()));
-
-        lesson.setLessonTitle(dto.getLessonTitle());
-        lesson.setLessonOrder(dto.getLessonOrder());
-        lesson.setUnit(unit);
-
-        Lesson updated = lessonRepository.save(lesson);
-        return LessonMapper.toLessonResponseDto(updated);
+        return response;
     }
 
     @Override
     public void deleteLesson(Long id) {
-        if (!lessonRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Lesson not found with id: " + id);
-        }
         lessonRepository.deleteById(id);
     }
 }

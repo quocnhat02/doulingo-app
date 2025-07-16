@@ -1,14 +1,12 @@
-package com.duolingo.clone.courseservice.dto;
+package com.duolingo.clone.common.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class LessonResponseDto {
     private Long lessonId;
     private String lessonTitle;
