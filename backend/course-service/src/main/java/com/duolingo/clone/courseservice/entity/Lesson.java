@@ -8,7 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "lessons")
+@Table(name = "lessons",
+        indexes = {
+                @Index(name = "idx_lesson_unit_id", columnList = "unit_id")
+        }
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

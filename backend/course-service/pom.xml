@@ -58,6 +58,11 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
 		<!-- Eureka Discovery Client -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
