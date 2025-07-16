@@ -1,5 +1,6 @@
 package com.duolingo.clone.challengeservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,25 +11,18 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ChallengeOption {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "challenge_option_id")
     private Long challengeOptionId;
 
-    @Column(name = "text", nullable = false)
-    private String text;
+    @Column(nullable = false)
+    private String content;
 
-    @Column(name = "correct", nullable = false)
-    private Boolean correct;
-
-    @Column(name = "image_src")
-    private String imageSrc;
-
-    @Column(name = "audio_src")
-    private String audioSrc;
+    @Column(nullable = false)
+    private boolean isCorrect;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "challenge_id", nullable = false)
+    @JsonBackReference
     private Challenge challenge;
 }

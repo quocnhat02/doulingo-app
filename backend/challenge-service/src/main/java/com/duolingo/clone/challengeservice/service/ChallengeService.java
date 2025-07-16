@@ -1,8 +1,5 @@
 package com.duolingo.clone.challengeservice.service;
 
-import com.duolingo.clone.challengeservice.dto.ChallengeDto;
-import com.duolingo.clone.challengeservice.dto.ChallengeResponseDto;
-
 import java.util.List;
 
 public interface ChallengeService {

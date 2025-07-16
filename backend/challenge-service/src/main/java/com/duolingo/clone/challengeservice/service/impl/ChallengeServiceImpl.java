@@ -1,8 +1,6 @@
 package com.duolingo.clone.challengeservice.service.impl;
 
 import com.duolingo.clone.challengeservice.client.LessonClient;
-import com.duolingo.clone.challengeservice.dto.ChallengeDto;
-import com.duolingo.clone.challengeservice.dto.ChallengeResponseDto;
 import com.duolingo.clone.challengeservice.entity.Challenge;
 import com.duolingo.clone.challengeservice.mapper.ChallengeMapper;
 import com.duolingo.clone.challengeservice.repository.ChallengeRepository;

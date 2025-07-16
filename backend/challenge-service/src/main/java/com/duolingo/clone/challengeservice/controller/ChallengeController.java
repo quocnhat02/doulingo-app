@@ -1,7 +1,5 @@
 package com.duolingo.clone.challengeservice.controller;
 
-import com.duolingo.clone.challengeservice.dto.ChallengeDto;
-import com.duolingo.clone.challengeservice.dto.ChallengeResponseDto;
 import com.duolingo.clone.challengeservice.service.ChallengeService;
 import com.duolingo.clone.common.response.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
