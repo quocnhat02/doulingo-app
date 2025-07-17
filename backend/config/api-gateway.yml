@@ -7,7 +7,8 @@ spring:
   security:
     oauth2:
       resource-server:
-        issuer-uri: http://localhost:8000/realms/duolingo
+        jwt:
+          issuer-uri: ${ISSUR_URI}
 
   main:
     web-application-type: reactive
@@ -46,3 +47,19 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: ${EUREKA_DEFAULT_ZONE}
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,beans,conditions,env,configprops,loggers,threaddump,
+          circuitbreakers,retry,ratelimiters,bulkheads,threadpoolbulkheads,timelimiters
+  endpoint:
+    health:
+      show-details: always
