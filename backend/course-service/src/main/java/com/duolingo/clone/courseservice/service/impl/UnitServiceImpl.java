@@ -25,7 +25,7 @@ public class UnitServiceImpl implements UnitService {
     @Transactional
     public UnitResponseDTO createUnit(UnitRequestDTO dto) {
         Course course = courseRepository.findById(dto.getCourseId())
-                .orElseThrow(() -> new IllegalArgumentException("Course not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Course not found"));
 
         Unit unit = Unit.builder()
                 .unitTitle(dto.getUnitTitle())
@@ -49,7 +49,7 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public UnitResponseDTO getUnitById(Long id) {
         Unit unit = unitRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Unit not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Unit not found"));
 
         UnitResponseDTO response = new UnitResponseDTO();
         response.setUnitId(unit.getUnitId());

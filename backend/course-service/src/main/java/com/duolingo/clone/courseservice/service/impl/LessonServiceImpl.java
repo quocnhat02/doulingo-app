@@ -1,8 +1,8 @@
 package com.duolingo.clone.courseservice.service.impl;
 
+import com.duolingo.clone.common.dto.LessonResponseDTO;
 import com.duolingo.clone.common.exception.ResourceNotFoundException;
 import com.duolingo.clone.courseservice.dto.request.LessonRequestDTO;
-import com.duolingo.clone.courseservice.dto.response.LessonResponseDTO;
 import com.duolingo.clone.courseservice.entity.Lesson;
 import com.duolingo.clone.courseservice.entity.Unit;
 import com.duolingo.clone.courseservice.repository.LessonRepository;
@@ -12,7 +12,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class LessonServiceImpl implements LessonService {
     @Transactional
     public LessonResponseDTO createLesson(LessonRequestDTO dto) {
         Unit unit = unitRepository.findById(dto.getUnitId())
-                .orElseThrow(() -> new IllegalArgumentException("Unit not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Unit not found"));
 
         Lesson lesson = Lesson.builder()
                 .lessonTitle(dto.getLessonTitle())
@@ -47,7 +46,7 @@ public class LessonServiceImpl implements LessonService {
     @Override
     public LessonResponseDTO getLessonById(Long id) {
         Lesson lesson = lessonRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Lesson not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Lesson not found"));
 
         LessonResponseDTO response = new LessonResponseDTO();
         response.setLessonId(lesson.getLessonId());

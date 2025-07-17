@@ -6,20 +6,33 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
       routes:
         - id: course-service
           uri: lb://course-service
           predicates:
             - Path=/api/courses/**
+
         - id: challenge-service
           uri: lb://challenge-service
           predicates:
-            - Path=/api/challenges/**
+            - Path=/api/challenges/**, /api/challengeOptions/**
+
         - id: progress-service
           uri: lb://progress-service
           predicates:
             - Path=/api/progress/**
+
         - id: subscription-service
           uri: lb://subscription-service
           predicates:
-            - Path=/api/subscription/**
+            - Path=/api/subscriptions/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
