@@ -1,0 +1,29 @@
+services:
+  keycloak-access-mgmt:
+    image: quay.io/keycloak/keycloak:26.3.1
+    command: start
+    environment:
+#      KC_HOSTNAME: keycloak-access-mgmt
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://${KEYCLOAK_DB_HOST}:${KEYCLOAK_DB_PORT}/${KEYCLOAK_DB_NAME}?sslmode=require
+      KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASS}
+      KC_PROXY_HEADERS: forwarded
+    ports:
+      - 8000:8080
+    restart: always
+    networks:
+      - keycloak_network
+
+
+networks:
+  keycloak_network:
+    driver: bridge

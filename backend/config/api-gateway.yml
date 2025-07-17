@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: api-gateway
+  security:
+    oauth2:
+      resource-server:
+        issuer-uri: http://localhost:8000/realms/duolingo
+
   main:
     web-application-type: reactive
   cloud:
