@@ -1,8 +1,8 @@
 package com.duolingo.clone.courseservice.controller;
 
+import com.duolingo.clone.common.dto.LessonResponseDTO;
 import com.duolingo.clone.common.response.ApiResponse;
 import com.duolingo.clone.courseservice.dto.request.LessonRequestDTO;
-import com.duolingo.clone.courseservice.dto.response.LessonResponseDTO;
 import com.duolingo.clone.courseservice.service.LessonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
