@@ -9,10 +9,9 @@ import com.duolingo.clone.challengeservice.service.ChallengeService;
 import com.duolingo.clone.common.dto.LessonResponseDTO;
 import com.duolingo.clone.common.exception.BadRequestException;
 import com.duolingo.clone.common.exception.ResourceNotFoundException;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -25,18 +24,15 @@ public class ChallengeServiceImpl implements ChallengeService {
     private final ChallengeRepository challengeRepository;
     private final LessonClient lessonClient;
 
-    @Retryable(
-            value = { ResourceAccessException.class },
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 3000))
+    @Retry(name = "lessonService", fallbackMethod = "recoverLesson")
+    @CircuitBreaker(name = "lessonService", fallbackMethod = "recoverLesson")
     public LessonResponseDTO safeGetLessonById(Long lessonId) {
         return lessonClient.getLessonById(lessonId).getData();
     }
 
-    @Recover
-    public LessonResponseDTO recoverLesson(ResourceAccessException ex, Long lessonId) {
+    public LessonResponseDTO recoverLesson(Exception ex, Long lessonId) {
 //        log.error("Retry failed for lessonId {}: {}", lessonId, ex.getMessage());
-        throw new BadRequestException("Cannot verify lesson from course-service");
+        throw new BadRequestException("Cannot verify lesson from course-service: " + ex.getMessage());
     }
 
 

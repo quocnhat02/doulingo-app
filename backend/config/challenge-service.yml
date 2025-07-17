@@ -34,3 +34,27 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${random.value}
+
+resilience4j:
+  retry:
+    instances:
+      lessonService:
+        maxAttempts: 3
+        waitDuration: 3s
+  circuitbreaker:
+    instances:
+      lessonService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,beans,conditions,env,configprops,loggers,threaddump,
+          circuitbreakers,retry,ratelimiters,bulkheads,threadpoolbulkheads,timelimiters
+  endpoint:
+    health:
+      show-details: always

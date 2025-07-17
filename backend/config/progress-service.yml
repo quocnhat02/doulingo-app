@@ -22,3 +22,14 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${random.value}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,beans,conditions,env,configprops,loggers,threaddump,
+          circuitbreakers,retry,ratelimiters,bulkheads,threadpoolbulkheads,timelimiters
+  endpoint:
+    health:
+      show-details: always
